@@ -19,9 +19,17 @@ app.use(morgan("combined"));
 app.post("/chess", express.urlencoded({ extended: true }), (req, res) => {
     const gameId = uuidv4().substring(0, 8);
 
-    // First player who joins game will automatically play as white
+    // Player who creates game will automatically play as white
     const orientation = "white";
 
+    res.status(200).render("chess", { gameId, orientation });
+});
+// GET /chess?gameId=abc123
+app.get("/chess", (req, res) => {
+    const gameId = req.query.gameId;
+
+    // Player who joins game will be black
+    const orientation = "black";
     res.status(200).render("chess", { gameId, orientation });
 });
 
