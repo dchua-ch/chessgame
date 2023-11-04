@@ -18,8 +18,12 @@
         <script defer src="/chess.js"></script>
     </head>
     <body data-gameid="{{gameId}}" data-orientation="{{orientation}}">
+        <!-- Hide data inside data attribute -->
         <h1>Game Id: <code>{{gameId}}</code></h1>
 
-        <!-- Hide data inside data attribute -->
+        <!-- Display chessboard -->
+        <div id="board1" style="width: 400px"></div>
+
+        <h2><a href="/">Back</a></h2>
     </body>
 </html>
