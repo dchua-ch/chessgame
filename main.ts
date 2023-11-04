@@ -42,6 +42,7 @@ app.patch("/chess/:gameId", express.json(), (req, res) => {
     const move = req.body;
 
     console.info(`GameId:${gameId}, `, move);
+    sse.send({ event: gameId, data: move });
 
     res.status(201).json({ timestamp: new Date().getTime() });
 });

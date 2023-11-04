@@ -31,6 +31,12 @@ const config = {
     onDrop,
 };
 
-var board1 = Chessboard("board1", config);
+var chess = Chessboard("board1", config);
 
 const sse = new EventSource("/chess/stream");
+sse.addEventListener(gameId, (msg) => {
+    console.info(">>> SSE msg: ", msg);
+    const { src, dst, piece } = JSON.parse(msg.data);
+    console.info(`src: ${src}, dst:${dst}, piece:${piece}`);
+    chess.move(`${src}-${dst}`);
+});
