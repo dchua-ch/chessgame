@@ -2,12 +2,14 @@ import express from "express";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
 import { v4 as uuidv4 } from "uuid";
+import { EventSource } from "express-ts-sse";
 
 // If port is not set, default to 3000
 const port = process.env.PORT || 3000;
 
-// create an instance of ze application
+const sse = new EventSource();
 
+// create an instance of ze application
 const app = express();
 // Log incoming request
 app.engine("html", engine({ defaultLayout: false }));
@@ -32,6 +34,19 @@ app.get("/chess", (req, res) => {
     const orientation = "black";
     res.status(200).render("chess", { gameId, orientation });
 });
+
+// PATCH /chess/:gameId
+app.patch("/chess/:gameId", express.json(), (req, res) => {
+    // Get the gameId from the resource
+    const gameId = req.params.gameId;
+    const move = req.body;
+
+    console.info(`GameId:${gameId}, `, move);
+
+    res.status(201).json({ timestamp: new Date().getTime() });
+});
+// GET /chess/stream
+app.get("/chess/stream", sse.init);
 
 // Serve ze files from static
 app.use(express.static(__dirname + "/static"));
