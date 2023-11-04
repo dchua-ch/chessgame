@@ -4,8 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{gameId}}</title>
+        <!-- Defer javascript query until page is loaded -->
+        <script defer src="/chess.js"></script>
     </head>
-    <body data-gameid="{{gameid}}" data-orientation="{{orientation}}">
+    <body data-gameid="{{gameId}}" data-orientation="{{orientation}}">
         <h1>Game Id: <code>{{gameId}}</code></h1>
 
         <!-- Hide data inside data attribute -->
