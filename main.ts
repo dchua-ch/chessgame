@@ -10,7 +10,11 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-app.get("/", (_req, res) => res.send("Hello world!"));
+// Enable logging
+app.use(morgan("combined"));
+
+// Serve ze files from static
+app.use(express.static(__dirname + "/static"));
 
 app.listen(port, () => {
     console.info(`Application bound to port ${port} at ${new Date()}`);
