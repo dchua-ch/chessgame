@@ -21,6 +21,8 @@ app.post("/chess", express.urlencoded({ extended: true }), (req, res) => {
 
     // First player who joins game will automatically play as white
     const orientation = "white";
+
+    res.status(200).render("chess", { gameId, orientation });
 });
 
 // Serve ze files from static
